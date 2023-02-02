@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+    belongs_to :author
     # Object lifecycle callback
     before_validation :capitalize_category_name
 

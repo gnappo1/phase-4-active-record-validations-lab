@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
     private
 
     def not_found
-        render json: {error: "Record not found!"}, status: 400
+        render json: {error: "Record not found with id #{params[:id]}!"}, status: 400
     end
 
     def invalid_record(raised_error)
