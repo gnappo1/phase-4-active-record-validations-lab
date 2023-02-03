@@ -19,7 +19,7 @@ class PostsController < ApplicationController
         else
             post = Post.create!(post_params)
             # if post.id
-            render json: post, status: 201
+            render json: {post: author.posts.last}, status: 201
             # else
                 # render json: post.errors.full_messages.to_s, status: 400
             # end
