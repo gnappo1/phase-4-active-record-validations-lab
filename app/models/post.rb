@@ -16,7 +16,9 @@ class Post < ApplicationRecord
     # validate :true_facts
 
     def capitalize_category_name
-        self.category = self.category.capitalize
+        if self.category
+            self.category = self.category.split("-").map(&:capitalize).join("-")
+        end
     end
 
     def true_facts
