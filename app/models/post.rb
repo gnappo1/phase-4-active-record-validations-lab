@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
-    belongs_to :author
+    belongs_to :creator, class_name: "Author", foreign_key: "author_id"
+    has_many :favorites
+    has_many :commentors, through: :favorites, source: "author"
     # Object lifecycle callback
     before_validation :capitalize_category_name
 
@@ -14,7 +16,9 @@ class Post < ApplicationRecord
     # validate :true_facts
 
     def capitalize_category_name
-        self.category = self.category.capitalize
+        if self.category
+            self.category = self.category.split("-").map(&:capitalize).join("-")
+        end
     end
 
     def true_facts
