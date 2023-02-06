@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
-    belongs_to :author
+    belongs_to :creator, class_name: "Author", foreign_key: 'author_id'
+    has_many :favorites, dependent: :destroy
+    has_many :commentors, through: :favorites, source: :author
     # Object lifecycle callback
     before_validation :capitalize_category_name
 

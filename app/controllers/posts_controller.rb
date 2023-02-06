@@ -3,7 +3,7 @@ class PostsController < ApplicationController
     def index
         if params[:author_id]
             author = Author.find(params[:author_id])
-            render json: author.posts, status: 200
+            render json: author.created_posts, status: 200
         else
             render json: Post.all, status: 200
         end
@@ -13,13 +13,13 @@ class PostsController < ApplicationController
         if params[:author_id]
             # find the correct author (if any)
             author = Author.find(params[:author_id])
-            author.posts.create!(post_params)
-            render json: author.posts.last, status: 201
+            author.created_posts.create!(post_params)
+            render json: author.created_posts.last, status: 201
             # find the associated posts and give them to the frontend
         else
             post = Post.create!(post_params)
             # if post.id
-            render json: {post: author.posts.last}, status: 201
+            render json: {post: author.created_posts.last}, status: 201
             # else
                 # render json: post.errors.full_messages.to_s, status: 400
             # end
